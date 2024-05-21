@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      imagePullSecrets:
+        - name: docker-secret
+      containers:
+        - name: api
+          image: default-api
+          command: ["npm", "start"]
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: configmap-api
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: 25m
+            limits:
+              memory: "400Mi"
+              cpu: 200m

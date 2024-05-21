@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      imagePullSecrets:
+        - name: docker-secret
+      containers:
+        - name: web
+          image: default-web
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: configmap-web
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: 25m
+            limits:
+              memory: "64Mi"
+              cpu: 200m
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: 80

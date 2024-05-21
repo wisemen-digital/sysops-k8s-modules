@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  labels:
+    app: redis
+    service: redis
+spec:
+  serviceName: redis
+  podManagementPolicy: Parallel
+  replicas: 1
+  selector:
+    matchLabels:
+      service: redis
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+        service: redis
+    spec:
+      securityContext:
+        fsGroup: 2001
+        runAsUser: 10001
+        runAsGroup: 3001
+        runAsNonRoot: true
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379
+              name: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
