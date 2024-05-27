@@ -20,11 +20,6 @@ spec:
         app: redis
         service: redis
     spec:
-      securityContext:
-        fsGroup: 2001
-        runAsUser: 10001
-        runAsGroup: 3001
-        runAsNonRoot: true
       terminationGracePeriodSeconds: 300
       containers:
         - name: redis
