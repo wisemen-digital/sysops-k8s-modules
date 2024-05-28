@@ -1,0 +1,34 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: matomo-archive
+  namespace: matomo
+  labels:
+    app: matomo
+spec:
+  schedule: '*/30 * * * *'
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: matomo-archive
+              image: default-matomo
+              args:
+                - scheduler
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 400m
+                  memory: 512Mi
+              volumeMounts:
+                - mountPath: /var/www/html
+                  name: html-files
+          restartPolicy: OnFailure
+          volumes:
+            - name: html-files
+              persistentVolumeClaim:
+                claimName: matomo-data-pvc

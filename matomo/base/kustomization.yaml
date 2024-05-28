@@ -1,0 +1,11 @@
+---
+resources:
+  - cronjob.yaml
+  - deployment.yaml
+  - namespace.yaml
+  - service.yaml
+  - volume.yaml
+images:
+  - name: default-matomo
+    newName: ghcr.io/wisemen-digital/matomo
+    newTag: latest

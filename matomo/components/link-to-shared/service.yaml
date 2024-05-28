@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shared-matomo-service
+  labels:
+    app: matomo
+spec:
+  type: ExternalName
+  externalName: shared-matomo-service.shared-matomo
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app: matomo

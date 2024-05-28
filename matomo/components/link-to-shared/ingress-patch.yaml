@@ -1,0 +1,11 @@
+---
+- op: add
+  path: /spec/rules/0/http/paths/-
+  value: 
+    path: /metrics
+    pathType: Prefix
+    backend:
+      service:
+        name: shared-matomo-service
+        port:
+          name: http

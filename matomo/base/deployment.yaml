@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matomo
+  namespace: matomo
+  labels:
+    app: matomo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matomo
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: matomo
+    spec:
+      initContainers:
+        - name: init
+          image: default-matomo
+          imagePullPolicy: Always
+          args:
+            - init
+          envFrom:
+            - configMapRef:
+                name: configmap-matomo
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: html-files
+      containers:
+        - name: matomo
+          image: default-matomo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: html-files
+      volumes:
+        - name: html-files
+          persistentVolumeClaim:
+            claimName: matomo-data-pvc
