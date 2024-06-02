@@ -41,3 +41,7 @@ spec:
             limits:
               memory: "400Mi"
               cpu: 200m
+          readinessProbe:
+            httpGet:
+              path: /api
+              port: 3000
