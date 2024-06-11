@@ -26,7 +26,7 @@ spec:
       containers:
         - name: api-websockets
           image: default-api
-          command: ["node", "./dist/websockets/server.js"]
+          command: ["node", "./dist/src/entrypoints/wss.js"]
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
