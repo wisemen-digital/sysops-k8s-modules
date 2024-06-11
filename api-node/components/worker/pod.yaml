@@ -26,7 +26,7 @@ spec:
       containers:
         - name: api-worker
           image: default-api
-          command: ["node", "./src/entrypoints/worker.js"]
+          command: ["node", "./dist/src/entrypoints/worker.js"]
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
