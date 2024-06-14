@@ -8,6 +8,7 @@ metadata:
     app: matomo
 spec:
   schedule: '*/30 * * * *'
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:

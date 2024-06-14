@@ -26,8 +26,8 @@ spec:
       containers:
         - name: api-websockets
           image: default-api
-          command: ["node", "./dist/src/entrypoints/wss.js"]
           imagePullPolicy: Always
+          command: ['node', './dist/src/entrypoints/wss.js']
           envFrom:
             - configMapRef:
                 name: configmap-api
@@ -36,8 +36,8 @@ spec:
               name: http
           resources:
             requests:
-              memory: "100Mi"
+              memory: 128Mi
               cpu: 25m
             limits:
-              memory: "400Mi"
+              memory: 512Mi
               cpu: 200m

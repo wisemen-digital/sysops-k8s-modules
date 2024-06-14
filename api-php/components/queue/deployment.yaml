@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-worker
+  name: api-queue
   labels:
     app: api
     tier: backend
@@ -10,7 +10,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-worker
+      app: api-queue
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,22 +19,32 @@ spec:
   template:
     metadata:
       labels:
-        app: api-worker
+        app: api-queue
     spec:
       imagePullSecrets:
         - name: docker-secret
-      containers:
-        - name: api-worker
+      initContainers:
+        - name: init
           image: default-api
-          command: ["node", "./dist/src/entrypoints/worker.js"]
           imagePullPolicy: Always
+          args:
+            - init
+          envFrom:
+            - configMapRef:
+                name: configmap-api
+      containers:
+        - name: api-queue
+          image: default-api
+          imagePullPolicy: Always
+          args:
+            - queue
           envFrom:
             - configMapRef:
                 name: configmap-api
           resources:
             requests:
-              memory: "100Mi"
+              memory: 64Mi
               cpu: 25m
             limits:
-              memory: "400Mi"
-              cpu: 200m
+              memory: 256Mi
+              cpu: 100m

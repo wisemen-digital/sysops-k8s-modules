@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-scheduler
+  name: api-worker
   labels:
     app: api
     tier: backend
@@ -10,7 +10,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-scheduler
+      app: api-worker
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,32 +19,22 @@ spec:
   template:
     metadata:
       labels:
-        app: api-scheduler
+        app: api-worker
     spec:
       imagePullSecrets:
         - name: docker-secret
-      initContainers:
-        - name: init
-          image: default-api
-          imagePullPolicy: Always
-          args:
-            - init
-          envFrom:
-            - configMapRef:
-                name: configmap-api
       containers:
-        - name: api-scheduler
+        - name: api-worker
           image: default-api
           imagePullPolicy: Always
-          args:
-            - scheduler
+          command: ['node', './dist/src/entrypoints/worker.js']
           envFrom:
             - configMapRef:
                 name: configmap-api
           resources:
             requests:
-              memory: "64Mi"
+              memory: 128Mi
               cpu: 25m
             limits:
-              memory: "256Mi"
-              cpu: 100m
+              memory: 512Mi
+              cpu: 200m

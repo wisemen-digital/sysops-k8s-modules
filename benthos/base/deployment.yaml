@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   name: benthos
   labels:
-    app: api
-    tier: backend
+    app: benthos
+    tier: benthos
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
         - name: benthos
           image: docker.redpanda.com/redpandadata/redpanda
           imagePullPolicy: Always
-          args: ["connect", "run"]
+          args: ['connect', 'run']
           volumeMounts:
             - name: config-volume
               mountPath: /connect.yaml
@@ -36,10 +36,10 @@ spec:
               mountPath: /certs
           resources:
             requests:
-              memory: "100Mi"
+              memory: 128Mi
               cpu: 25m
             limits:
-              memory: "400Mi"
+              memory: 512Mi
               cpu: 200m
       volumes:
         - name: config-volume
