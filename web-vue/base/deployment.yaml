@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: web
   labels:
+    app: web
     tier: backend
 spec:
   replicas: 1
