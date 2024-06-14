@@ -1,0 +1,33 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: api-scheduler
+  labels:
+    app: api
+    tier: backend
+spec:
+  schedule: '*/30 * * * *'
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: docker-secret
+          containers:
+            - name: api-scheduler
+              image: default-api
+              imagePullPolicy: Always
+              command: ['node', './dist/src/entrypoints/cronjob.js']
+              envFrom:
+                - configMapRef:
+                    name: configmap-api
+              resources:
+                requests:
+                  memory: 128Mi
+                  cpu: 25m
+                limits:
+                  memory: 512Mi
+                  cpu: 200m
+          restartPolicy: OnFailure
