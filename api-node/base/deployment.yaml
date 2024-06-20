@@ -41,6 +41,14 @@ spec:
             limits:
               memory: 512Mi
               cpu: 200m
+          startupProbe:
+            httpGet:
+              path: /api
+              port: 3000
+          livenessProbe:
+            httpGet:
+              path: /api
+              port: 3000
           readinessProbe:
             httpGet:
               path: /api
