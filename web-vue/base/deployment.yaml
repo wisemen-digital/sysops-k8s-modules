@@ -5,7 +5,7 @@ metadata:
   name: web
   labels:
     app: web
-    tier: backend
+    tier: frontend
 spec:
   replicas: 1
   selector:
