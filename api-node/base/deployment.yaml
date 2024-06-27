@@ -45,6 +45,9 @@ spec:
             httpGet:
               path: /api
               port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
           livenessProbe:
             httpGet:
               path: /api
