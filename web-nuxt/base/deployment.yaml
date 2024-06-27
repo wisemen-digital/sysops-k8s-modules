@@ -47,16 +47,16 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 5
             failureThreshold: 20
-            timeoutSeconds: 5
+            timeoutSeconds: 10
           livenessProbe:
             httpGet:
               path: /
               port: http
-            timeoutSeconds: 5
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: http
-            timeoutSeconds: 5
+            timeoutSeconds: 10
             initialDelaySeconds: 30
 
