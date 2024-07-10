@@ -28,6 +28,7 @@ spec:
           image: default-api
           imagePullPolicy: Always
           command: ['node', './dist/src/entrypoints/worker.js']
+          args: ['--queue="system"']
           envFrom:
             - configMapRef:
                 name: configmap-api
