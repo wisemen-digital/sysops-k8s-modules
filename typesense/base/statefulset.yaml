@@ -29,6 +29,7 @@ spec:
       containers:
         - name: typesense
           image: typesense/typesense:26.0
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: configmap-typesense

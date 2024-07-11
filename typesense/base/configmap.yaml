@@ -3,6 +3,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configmap-typesense
+  labels:
+    app: typesense
+    service: typesense
 data:
   TYPESENSE_DATA_DIR: /usr/share/typesense/data
   TYPESENSE_API_KEY: ldflDFA212sDFSKLJLJ234567jhfhgdg

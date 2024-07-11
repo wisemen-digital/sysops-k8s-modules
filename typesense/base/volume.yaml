@@ -3,6 +3,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: typesense-pvc
+  labels:
+    app: typesense
+    service: typesense
 spec:
   accessModes:
     - ReadWriteOnce

@@ -5,6 +5,7 @@ metadata:
   name: typesense
   labels:
     app: typesense
+    service: typesense
 spec:
   clusterIP: None
   ports:

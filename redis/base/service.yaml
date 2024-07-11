@@ -5,6 +5,7 @@ metadata:
   name: redis
   labels:
     app: redis
+    service: redis
 spec:
   clusterIP: None
   ports:
