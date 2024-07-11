@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-redis
+  labels:
+    app: redis
+    service: redis
+data:
+  redis.conf: |
+    maxmemory 250mb
+    maxmemory-policy allkeys-lru
+    maxclients 12000
+    timeout 300
+    appendonly no
+    dbfilename dump.rdb
+    dir /data

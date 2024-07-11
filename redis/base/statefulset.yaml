@@ -25,6 +25,9 @@ spec:
         - name: redis
           image: redis:7-alpine
           imagePullPolicy: Always
+          command:
+            - redis-server
+            - /usr/local/etc/redis/redis.conf
           ports:
             - containerPort: 6379
               name: http
@@ -35,3 +38,15 @@ spec:
             limits:
               cpu: 200m
               memory: 256Mi
+          volumeMounts:
+            - name: redis-pv
+              mountPath: /data  # Must match configmap
+            - name: redis-config
+              mountPath: /usr/local/etc/redis
+      volumes:
+        - name: redis-pv
+          persistentVolumeClaim:
+            claimName: redis-pvc
+        - name: redis-config
+          configMap:
+            name: configmap-redis
