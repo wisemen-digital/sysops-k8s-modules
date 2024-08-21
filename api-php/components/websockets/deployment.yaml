@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-websockets
+  labels:
+    app: api
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-websockets
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: api-websockets
+    spec:
+      imagePullSecrets:
+        - name: docker-secret
+      initContainers:
+        - name: init
+          image: default-api
+          imagePullPolicy: Always
+          args:
+            - init
+          envFrom:
+            - configMapRef:
+                name: configmap-api
+      containers:
+        - name: api-websockets
+          image: default-api
+          imagePullPolicy: Always
+          args:
+            - websockets
+          envFrom:
+            - configMapRef:
+                name: configmap-api
+          ports:
+            - containerPort: 6001
+              name: http
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 25m
+            limits:
+              memory: 256Mi
+              cpu: 100m
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            tcpSocket:
+              port: http
