@@ -4,3 +4,7 @@ kind: Component
 resources:
   - deployment.yaml
   - service.yaml
+patches:
+  - target:
+      kind: Ingress
+    path: ingress-patch.yaml
