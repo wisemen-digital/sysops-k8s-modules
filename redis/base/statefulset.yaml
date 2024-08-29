@@ -43,6 +43,18 @@ spec:
               mountPath: /data  # Must match configmap
             - name: redis-config
               mountPath: /usr/local/etc/redis
+          startupProbe:
+            tcpSocket:
+              port: redis
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: redis
+          readinessProbe:
+            tcpSocket:
+              port: redis
       volumes:
         - name: redis-pv
           persistentVolumeClaim:
