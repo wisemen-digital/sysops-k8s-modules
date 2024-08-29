@@ -35,7 +35,7 @@ spec:
                 name: configmap-typesense
           ports:
             - containerPort: 8108  # Must match configmap
-              name: http
+              name: typesense
           resources:
             requests:
               memory: 256Mi

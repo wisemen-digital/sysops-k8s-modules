@@ -30,7 +30,7 @@ spec:
             - /usr/local/etc/redis/redis.conf
           ports:
             - containerPort: 6379
-              name: http
+              name: redis
           resources:
             requests:
               cpu: 25m

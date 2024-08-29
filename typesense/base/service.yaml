@@ -9,8 +9,8 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: http
+    - name: typesense
       port: 8108
-      targetPort: http
+      targetPort: typesense
   selector:
     app: typesense
