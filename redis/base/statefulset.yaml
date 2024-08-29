@@ -23,7 +23,7 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: redis
-          image: redis:7-alpine
+          image: default-redis
           imagePullPolicy: Always
           command:
             - redis-server
