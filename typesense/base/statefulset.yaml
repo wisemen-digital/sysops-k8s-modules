@@ -46,6 +46,18 @@ spec:
           volumeMounts:
             - name: typesense-pv
               mountPath: /usr/share/typesense/data  # Must match configmap
+          startupProbe:
+            tcpSocket:
+              port: typesense
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: typesense
+          readinessProbe:
+            tcpSocket:
+              port: typesense
       volumes:
         - name: typesense-pv
           persistentVolumeClaim:
