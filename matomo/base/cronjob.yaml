@@ -36,3 +36,4 @@ spec:
             - name: html-files
               persistentVolumeClaim:
                 claimName: matomo-data-pvc
+                readOnly: true
