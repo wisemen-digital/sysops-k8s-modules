@@ -25,6 +25,9 @@ spec:
         - name: pgbouncer
           image: default-pgbouncer
           imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: configmap-pgbouncer
           ports:
             - containerPort: 5432
               name: postgres

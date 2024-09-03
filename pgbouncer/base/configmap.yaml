@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-pgbouncer
+  labels:
+    app: pgbouncer
+    service: pgbouncer
+data:
+  DATABASE_URL: postgres://user:pass@postgres-host/database

@@ -2,6 +2,7 @@
 resources:
   - statefulset.yaml
   - service.yaml
+  - configmap.yaml
 images:
   - name: default-pgbouncer
     newName: edoburu/pgbouncer
