@@ -5,12 +5,12 @@ metadata:
   name: pgbouncer
   labels:
     app: pgbouncer
+    service: pgbouncer
 spec:
-  type: ClusterIP
+  clusterIP: None
   ports:
-    - port: 5432
-      targetPort: 5432
-      protocol: TCP
-      name: postgres
+    - name: postgres
+      port: 5432
+      targetPort: postgres
   selector:
     app: pgbouncer

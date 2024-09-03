@@ -1,4 +1,8 @@
 ---
 resources:
-  - deployment.yaml
+  - statefulset.yaml
   - service.yaml
+images:
+  - name: default-pgbouncer
+    newName: edoburu/pgbouncer
+    newTag: latest

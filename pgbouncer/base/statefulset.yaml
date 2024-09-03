@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pgbouncer
+  labels:
+    app: pgbouncer
+    service: pgbouncer
+spec:
+  serviceName: pgbouncer
+  podManagementPolicy: Parallel
+  replicas: 1
+  selector:
+    matchLabels:
+      service: pgbouncer
+      app: pgbouncer
+  template:
+    metadata:
+      labels:
+        app: pgbouncer
+        service: pgbouncer
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: pgbouncer
+          image: default-pgbouncer
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+              name: postgres
+          resources:
+            requests:
+              cpu: 25m
+              memory: 16Mi
+            limits:
+              memory: 50M
+              cpu: 100m
+          startupProbe:
+            tcpSocket:
+              port: postgres
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: postgres
+          readinessProbe:
+            tcpSocket:
+              port: postgres
