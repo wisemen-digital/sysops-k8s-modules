@@ -23,14 +23,14 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: redis
-          image: redis:7-alpine
+          image: default-redis
           imagePullPolicy: Always
           command:
             - redis-server
             - /usr/local/etc/redis/redis.conf
           ports:
             - containerPort: 6379
-              name: http
+              name: redis
           resources:
             requests:
               cpu: 25m
@@ -43,6 +43,18 @@ spec:
               mountPath: /data  # Must match configmap
             - name: redis-config
               mountPath: /usr/local/etc/redis
+          startupProbe:
+            tcpSocket:
+              port: redis
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: redis
+          readinessProbe:
+            tcpSocket:
+              port: redis
       volumes:
         - name: redis-pv
           persistentVolumeClaim:

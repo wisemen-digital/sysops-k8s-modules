@@ -4,3 +4,7 @@ resources:
   - service.yaml
   - statefulset.yaml
   - volume.yaml
+images:
+  - name: default-typesense
+    newName: typesense/typesense
+    newTag: '26.0'

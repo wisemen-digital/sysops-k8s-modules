@@ -9,8 +9,8 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: http
+    - name: redis
       port: 6379
-      targetPort: http
+      targetPort: redis
   selector:
     app: redis

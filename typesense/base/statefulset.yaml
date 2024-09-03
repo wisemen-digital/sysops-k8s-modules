@@ -28,14 +28,14 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: typesense
-          image: typesense/typesense:26.0
+          image: default-typesense
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: configmap-typesense
           ports:
             - containerPort: 8108  # Must match configmap
-              name: http
+              name: typesense
           resources:
             requests:
               memory: 256Mi
@@ -46,6 +46,18 @@ spec:
           volumeMounts:
             - name: typesense-pv
               mountPath: /usr/share/typesense/data  # Must match configmap
+          startupProbe:
+            tcpSocket:
+              port: typesense
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: typesense
+          readinessProbe:
+            tcpSocket:
+              port: typesense
       volumes:
         - name: typesense-pv
           persistentVolumeClaim:

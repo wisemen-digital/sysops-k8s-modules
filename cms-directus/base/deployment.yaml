@@ -39,7 +39,7 @@ spec:
               cpu: 25m
             limits:
               memory: 1024Mi
-              cpu: 400m
+              cpu: 600m
           livenessProbe:
             httpGet:
               path: /server/health

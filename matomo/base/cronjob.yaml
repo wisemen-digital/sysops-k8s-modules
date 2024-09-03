@@ -9,6 +9,9 @@ metadata:
 spec:
   schedule: '*/30 * * * *'
   concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
@@ -33,3 +36,4 @@ spec:
             - name: html-files
               persistentVolumeClaim:
                 claimName: matomo-data-pvc
+                readOnly: true
