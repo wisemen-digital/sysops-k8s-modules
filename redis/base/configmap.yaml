@@ -15,3 +15,6 @@ data:
     appendonly no
     dbfilename dump.rdb
     dir /data
+    aclfile /etc/redis/users.acl
+  users.acl: |
+    user default on nopass sanitize-payload ~* &* +@all
