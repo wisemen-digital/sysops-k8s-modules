@@ -17,10 +17,3 @@ data:
     dir /data
     aclfile /usr/local/etc/redis/users.acl
   users.acl: |
-    ### EXAMPLE
-    # user default off
-    # user development +subscribe +psubscribe +publish -@all on >PASSWORD
-    ### Create passwords in a random redis docker with:
-    ### >redis-cli
-    ### >ACL GENPASS 600
-
