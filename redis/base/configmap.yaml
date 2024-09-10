@@ -17,3 +17,4 @@ data:
     dir /data
     aclfile /usr/local/etc/redis/users.acl
   users.acl: |
+    user default on nopass sanitize-payload ~* &* +@all
