@@ -21,6 +21,7 @@ spec:
       labels:
         app: pgbouncer
     spec:
+      terminationGracePeriodSeconds: 120
       containers:
         - name: pgbouncer
           image: default-pgbouncer
@@ -38,6 +39,10 @@ spec:
             limits:
               cpu: 100m
               memory: 64M
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "killall -INT pgbouncer"]
           startupProbe:
             tcpSocket:
               port: postgres
