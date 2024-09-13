@@ -1,26 +1,26 @@
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: pgbouncer
   labels:
     app: pgbouncer
     service: pgbouncer
 spec:
-  serviceName: pgbouncer
-  podManagementPolicy: Parallel
   replicas: 1
   selector:
     matchLabels:
-      service: pgbouncer
       app: pgbouncer
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: pgbouncer
-        service: pgbouncer
     spec:
-      terminationGracePeriodSeconds: 300
       containers:
         - name: pgbouncer
           image: default-pgbouncer
@@ -36,8 +36,8 @@ spec:
               cpu: 25m
               memory: 16Mi
             limits:
-              memory: 50M
               cpu: 100m
+              memory: 64M
           startupProbe:
             tcpSocket:
               port: postgres
