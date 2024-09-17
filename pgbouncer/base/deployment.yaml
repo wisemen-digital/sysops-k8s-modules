@@ -42,7 +42,10 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "killall -INT pgbouncer"]
+                command:
+                  - /bin/sh
+                  - -c
+                  - killall --wait -INT pgbouncer
           startupProbe:
             tcpSocket:
               port: postgres
