@@ -1,6 +1,5 @@
 ---
 resources:
-  - cronjob.yaml
   - deployment.yaml
   - namespace.yaml
   - service.yaml
