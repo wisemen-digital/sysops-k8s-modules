@@ -1,0 +1,118 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zitadel
+  namespace: zitadel
+  labels:
+    app: zitadel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zitadel
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: zitadel
+    spec:
+      initContainers:
+        - name: init
+          image: default-zitadel
+          imagePullPolicy: Always
+          args:
+            - init
+            - --config
+            - /zitadel-config.yaml
+          envFrom:
+            - configMapRef:
+                name: configmap-zitadel
+          volumeMounts:
+            - mountPath: /zitadel-config.yaml
+              name: config-file
+              subPath: zitadel-config.yaml
+        - name: setup-cleanup
+          image: default-zitadel
+          imagePullPolicy: Always
+          args:
+            - setup
+            - cleanup
+            - --config
+            - /zitadel-config.yaml
+          envFrom:
+            - configMapRef:
+                name: configmap-zitadel
+          volumeMounts:
+            - mountPath: /zitadel-config.yaml
+              name: config-file
+              subPath: zitadel-config.yaml
+        - name: setup
+          image: default-zitadel
+          imagePullPolicy: Always
+          args:
+            - setup
+            - --masterkeyFromEnv
+            - --init-projections=true
+            - --tlsMode
+            - external
+            - --config
+            - /zitadel-config.yaml
+          envFrom:
+            - configMapRef:
+                name: configmap-zitadel
+          volumeMounts:
+            - mountPath: /zitadel-config.yaml
+              name: config-file
+              subPath: zitadel-config.yaml
+      containers:
+        - name: zitadel
+          image: default-zitadel
+          imagePullPolicy: Always
+          args:
+            - start
+            - --masterkeyFromEnv
+            - --tlsMode
+            - external
+            - --config
+            - /zitadel-config.yaml
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 400m
+              memory: 512Mi
+          envFrom:
+            - configMapRef:
+                name: configmap-zitadel
+          volumeMounts:
+            - mountPath: /zitadel-config.yaml
+              name: config-file
+              subPath: zitadel-config.yaml
+          startupProbe:
+            httpGet:
+              path: /debug/ready
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /debug/healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /debug/ready
+              port: http
+      volumes:
+        - name: config-file
+          configMap:
+            name: zitadel-config-file

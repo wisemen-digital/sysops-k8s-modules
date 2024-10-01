@@ -1,0 +1,10 @@
+---
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - namespace.yaml
+  - service.yaml
+images:
+  - name: default-zitadel
+    newName: ghcr.io/zitadel/zitadel
+    newTag: stable
