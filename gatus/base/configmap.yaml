@@ -6,6 +6,9 @@ metadata:
   namespace: kube-system
 data:
   config.yaml: |
+    alerting:
+      slack:
+        webhook-url: "${SLACK_WEBHOOK_URL}"
     storage:
       type: postgres
       path: "${POSTGRES_URL}"
@@ -13,15 +16,25 @@ data:
     endpoints:
       - name: "${FRONTEND_ENDPOINT_NAME}"
         url: "${FRONTEND_ENDPOINT_URL}"
-        interval: 5m
+        interval: 1m
         conditions:
           - "[STATUS] == 200"
           - "[BODY].message == OK"
           - "[RESPONSE_TIME] < 300"
+        alerts:
+          - type: slack
+            description: "STARLINE FRONTEND DOWN"
+            send-on-resolved: true
+            failure-threshold: 1
       - name: "${BACKEND_ENDPOINT_NAME}"
         url: "${BACKEND_ENDPOINT_URL}"
-        interval: 5m
+        interval: 1m
         conditions:
           - "[STATUS] == 200"
           - "[BODY].message == OK"
           - "[RESPONSE_TIME] < 300"
+        alerts:
+          - type: slack
+            description: "STARLINE BACKEND DOWN"
+            send-on-resolved: true
+            failure-threshold: 1
