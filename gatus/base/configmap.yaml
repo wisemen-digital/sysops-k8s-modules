@@ -9,6 +9,15 @@ data:
     alerting:
       slack:
         webhook-url: "${SLACK_WEBHOOK_URL}"
+      email:
+        from: "${MAIL_FROM}"
+        username: "${MAIL_USERNAME}"
+        password: "${MAIL_PASSWORD}"
+        host: ${MAIL_HOST}"
+        port: ${MAIL_PORT}
+        to: "${MAIL_TO}"
+        client:
+          insecure: false
     storage:
       type: postgres
       path: "${POSTGRES_URL}"
@@ -26,6 +35,10 @@ data:
             description: "STARLINE FRONTEND DOWN"
             send-on-resolved: true
             failure-threshold: 1
+          - type: email
+            description: "STARLINE BACKEND DOWN"
+            send-on-resolved: true
+            failure-threshold: 1
       - name: "${BACKEND_ENDPOINT_NAME}"
         url: "${BACKEND_ENDPOINT_URL}"
         interval: 1m
@@ -35,6 +48,10 @@ data:
           - "[RESPONSE_TIME] < 300"
         alerts:
           - type: slack
+            description: "STARLINE BACKEND DOWN"
+            send-on-resolved: true
+            failure-threshold: 1
+          - type: email
             description: "STARLINE BACKEND DOWN"
             send-on-resolved: true
             failure-threshold: 1
