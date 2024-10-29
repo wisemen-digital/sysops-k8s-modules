@@ -1,0 +1,12 @@
+---
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - namespace.yaml
+  - service.yaml
+images:
+  - name: default-gatus
+    newName: ghcr.io/twin/gatus
+    newTag: stable
+configMapGenerator:
+  - name: configmap-gatus

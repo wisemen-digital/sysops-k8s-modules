@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus-config
+  namespace: kube-system
+data:
+  config.yaml: |
+    storage:
+      type: postgres
+      path: "${POSTGRES_URL}"
+    metrics: true
+    endpoints:
+      - name: "${FRONTEND_ENDPOINT_NAME}"
+        url: "${FRONTEND_ENDPOINT_URL}"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].message == OK"
+          - "[RESPONSE_TIME] < 300"
+      - name: "${BACKEND_ENDPOINT_NAME}"
+        url: "${BACKEND_ENDPOINT_URL}"
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].message == OK"
+          - "[RESPONSE_TIME] < 300"
