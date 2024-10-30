@@ -29,7 +29,7 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[BODY].message == OK"
-          - "[RESPONSE_TIME] < 300"
+          - "[RESPONSE_TIME] < ${FRONTEND_ENDPOINT_RESPONSE_TIME}"
         alerts:
           - type: slack
             description: "STARLINE FRONTEND DOWN"
@@ -45,7 +45,7 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "[BODY].message == OK"
-          - "[RESPONSE_TIME] < 300"
+          - "[RESPONSE_TIME] < ${BACKEND_ENDPOINT_RESPONSE_TIME}"
         alerts:
           - type: slack
             description: "STARLINE BACKEND DOWN"
