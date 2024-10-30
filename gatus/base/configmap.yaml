@@ -34,11 +34,11 @@ data:
           - type: slack
             description: "STARLINE FRONTEND DOWN"
             send-on-resolved: true
-            failure-threshold: 1
+            failure-threshold: 3
           - type: email
-            description: "STARLINE BACKEND DOWN"
+            description: "STARLINE FRONTEND DOWN"
             send-on-resolved: true
-            failure-threshold: 1
+            failure-threshold: 3
       - name: "${BACKEND_ENDPOINT_NAME}"
         url: "${BACKEND_ENDPOINT_URL}"
         interval: 1m
@@ -50,8 +50,8 @@ data:
           - type: slack
             description: "STARLINE BACKEND DOWN"
             send-on-resolved: true
-            failure-threshold: 1
+            failure-threshold: 3
           - type: email
             description: "STARLINE BACKEND DOWN"
             send-on-resolved: true
-            failure-threshold: 1
+            failure-threshold: 3
