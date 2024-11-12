@@ -7,4 +7,4 @@ resources:
 images:
   - name: default-zitadel
     newName: ghcr.io/zitadel/zitadel
-    newTag: stable
+    newTag: latest
