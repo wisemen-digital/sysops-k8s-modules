@@ -1,7 +1,7 @@
 ---
 - op: add
   path: /spec/rules/0/http/paths/-
-  value: 
+  value:
     path: /metrics
     pathType: Prefix
     backend:

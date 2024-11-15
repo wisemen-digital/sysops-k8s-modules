@@ -1,0 +1,11 @@
+---
+namespace: signoz-otel-collector
+resources:
+  - configmap.yaml
+  - namespace.yaml
+  - otel-agent/
+  - otel-deployment/
+images:
+  - name: default-otel-collector
+    newName: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
+    newTag: latest

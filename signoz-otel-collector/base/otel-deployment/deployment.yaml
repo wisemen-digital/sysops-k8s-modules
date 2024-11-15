@@ -1,0 +1,85 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-deployment
+  labels:
+    app: otel-deployment
+spec:
+  selector:
+    matchLabels:
+      app: otel-deployment
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+  template:
+    metadata:
+      labels:
+        app: otel-deployment
+    spec:
+      containers:
+        - name: otel-deployment
+          image: default-otel-collector
+          imagePullPolicy: IfNotPresent
+          command:
+            - '/otelcol-contrib'
+          args:
+            - '--config=/conf/otel-deployment-config.yaml'
+          envFrom:
+            - configMapRef:
+                name: configmap-otel
+          env:
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8S_POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: K8S_HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: K8S_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: K8S_POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            - name: K8S_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: service.name=k8s-monitoring,k8s.cluster.name=$(K8S_CLUSTER_NAME)
+          ports:
+            - name: health-check
+              containerPort: 13133
+          volumeMounts:
+            - name: otel-deployment-config-vol
+              mountPath: /conf
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          livenessProbe:
+            httpGet:
+              port: health-check
+              path: /
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              port: health-check
+              path: /
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+      volumes:
+        - name: otel-deployment-config-vol
+          configMap:
+            name: otel-deployment-config-file
