@@ -27,6 +27,7 @@ spec:
         - name: cms
           image: default-cms
           imagePullPolicy: Always
+          command: ['npm', 'start']
           envFrom:
             - configMapRef:
                 name: configmap-cms
