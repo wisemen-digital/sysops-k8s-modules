@@ -1,0 +1,81 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-agent
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - namespaces
+      - nodes
+      - persistentvolumeclaims
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ''
+    resources:
+      - endpoints
+      - nodes
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - ''
+    resources:
+      - nodes/proxy
+    verbs:
+      - get
+  - apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - events
+      - nodes/stats
+    verbs:
+      - create
+      - get
+  - apiGroups:
+      - ''
+    resourceNames:
+      - otel-container-insight-clusterleader
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
