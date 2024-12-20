@@ -36,18 +36,18 @@ data:
       prometheus:
         config:
           global:
-            scrape_interval: 60s
+            scrape_interval: 15s
           scrape_configs:
             - job_name: scaleway
-              metrics_path: /prometheus
               scheme: https
               http_headers:
                 X-Token: 
-                  values:
-                    - 'igc0jtlykqE12NEVNG8YYbT2KHBQQOnd-UmKb1QIMT8vTWdtqhUc5D2zPqj7b2-8'
+                  values: 
+                    - igc0jtlykqE12NEVNG8YYbT2KHBQQOnd-UmKb1QIMT8vTWdtqhUc5D2zPqj7b2-8
               static_configs:
                 - targets:
                   - 4b7d8068-68be-433e-b9e9-4d090ccaac68.metrics.cockpit.nl-ams.scw.cloud
+              metrics_path: "/prometheus/metrics"
       k8s_cluster:
         allocatable_types_to_report:
           - cpu
@@ -80,6 +80,14 @@ data:
             - batch
           receivers:
             - k8s_events
+        metrics:
+          exporters:
+            - otlphttp
+          processors:
+            - resourcedetection
+            - batch
+          receivers:
+            - prometheus
         metrics/internal:
           exporters:
             - otlphttp
@@ -88,7 +96,6 @@ data:
             - batch
           receivers:
             - k8s_cluster
-            - prometheus
       telemetry:
         logs:
           encoding: json
