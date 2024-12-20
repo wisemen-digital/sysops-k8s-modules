@@ -98,6 +98,7 @@ data:
             - k8s_cluster
       telemetry:
         logs:
-          encoding: json
+          level: debug
+          encoding: console
         metrics:
           address: 0.0.0.0:8888
