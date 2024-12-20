@@ -47,7 +47,7 @@ data:
               static_configs:
                 - targets:
                   - 4b7d8068-68be-433e-b9e9-4d090ccaac68.metrics.cockpit.nl-ams.scw.cloud
-              metrics_path: "/prometheus/metrics"
+              metrics_path: "prometheus/api/v1/labels"
       k8s_cluster:
         allocatable_types_to_report:
           - cpu
