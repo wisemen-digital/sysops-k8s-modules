@@ -39,7 +39,7 @@ data:
             scrape_interval: 60s
           scrape_configs:
             - job_name: scaleway
-              metrics_path: '/metrics'
+              metrics_path: /prometheus
               scheme: https
               http_headers:
                 X-Token: 
