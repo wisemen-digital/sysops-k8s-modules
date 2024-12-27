@@ -1,0 +1,42 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-migration
+  labels:
+    app: db-migration
+    tier: backend
+spec:
+  schedule: '*/30 * * * *'
+  concurrencyPolicy: Forbid
+  suspend: true
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 60
+      template:
+        spec:
+          imagePullSecrets:
+            - name: docker-secret
+          containers:
+            - name: db-migration
+              image: default-api
+              imagePullPolicy: Always
+              command: [
+                'node',
+                './node_modules/typeorm/cli',
+                '-d',
+                './dist/src/sql/sources/main.js',
+                'migration:run'
+              ]
+              envFrom:
+                - configMapRef:
+                    name: configmap-api
+              resources:
+                requests:
+                  memory: 128Mi
+                  cpu: 50m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+          restartPolicy: OnFailure
