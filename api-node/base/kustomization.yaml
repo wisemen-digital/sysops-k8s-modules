@@ -2,4 +2,8 @@
 resources:
   - deployment.yaml
   - service.yaml
-  - configmap.yaml
+configMapGenerator:
+  - name: configmap-api
+generatorOptions:
+  labels:
+    app: api
