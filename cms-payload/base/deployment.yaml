@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms
+  labels:
+    app: cms
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cms
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cms
+    spec:
+      imagePullSecrets:
+        - name: docker-secret
+      containers:
+        - name: cms
+          image: default-cms
+          imagePullPolicy: Always
+          command: ['npm', 'start']
+          envFrom:
+            - configMapRef:
+                name: configmap-cms
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            requests:
+              memory: 192Mi
+              cpu: 25m
+            limits:
+              memory: 1024Mi
+              cpu: 600m
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
