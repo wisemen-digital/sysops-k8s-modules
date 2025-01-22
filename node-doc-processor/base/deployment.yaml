@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: node-doc-processor
   labels:
-    app: api
+    app: doc-processor
     tier: backend
 spec:
   replicas: 1
@@ -24,7 +24,7 @@ spec:
       imagePullSecrets:
         - name: docker-secret
       containers:
-        - name: api
+        - name: node-doc-processor
           image: default-doc-processor
           imagePullPolicy: Always
           command: ['npm', 'start']
