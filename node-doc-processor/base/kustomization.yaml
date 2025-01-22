@@ -3,6 +3,6 @@ resources:
   - deployment.yaml
   - service.yaml
 images:
-  - name: default-doc-processor
+  - name: default-node-doc-processor
     newName: ghcr.io/wisemen-digital/node-doc-processor
     newTag: latest

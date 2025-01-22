@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-service
+  name: node-doc-processor-service
   labels:
-    app: api
+    app: node-doc-processor
 spec:
   ports:
     - name: http
@@ -12,4 +12,4 @@ spec:
       targetPort: http
       protocol: TCP
   selector:
-    app: api
+    app: node-doc-processor

@@ -4,13 +4,13 @@ kind: Deployment
 metadata:
   name: node-doc-processor
   labels:
-    app: doc-processor
+    app: node-doc-processor
     tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: node-doc-processor
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,13 +19,13 @@ spec:
   template:
     metadata:
       labels:
-        app: api
+        app: node-doc-processor
     spec:
       imagePullSecrets:
         - name: docker-secret
       containers:
         - name: node-doc-processor
-          image: default-doc-processor
+          image: default-node-doc-processor
           imagePullPolicy: Always
           command: ['npm', 'start']
           envFrom:
