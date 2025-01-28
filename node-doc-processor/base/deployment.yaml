@@ -27,7 +27,8 @@ spec:
         - name: node-doc-processor
           image: default-node-doc-processor
           imagePullPolicy: Always
-          command: ['npm', 'start']
+          command: ['node', './dist/src/entrypoints/worker.js']
+          args: ['--queue="doc-processor"']
           envFrom:
             - configMapRef:
                 name: configmap-api
