@@ -42,9 +42,9 @@ spec:
               cpu: 1
           livenessProbe:
             httpGet:
-              path: /server/health
+              path: /server/ping
               port: 3000
           readinessProbe:
             httpGet:
-              path: /server/ping
+              path: /server/health
               port: 3000
