@@ -4,13 +4,13 @@ kind: Deployment
 metadata:
   name: cms
   labels:
-    app: web
+    app: cms
     tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
+      app: cms
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app: web
+        app: cms
     spec:
       imagePullSecrets:
         - name: docker-secret
