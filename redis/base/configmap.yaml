@@ -8,7 +8,7 @@ metadata:
     service: redis
 data:
   redis.conf: |
-    maxmemory 250mb
+    maxmemory 225mb
     maxmemory-policy allkeys-lru
     maxclients 12000
     timeout 300
