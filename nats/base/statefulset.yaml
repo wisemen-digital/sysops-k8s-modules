@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nats
+  labels:
+    app: nats
+    service: nats
+spec:
+  serviceName: nats
+  podManagementPolicy: Parallel
+  replicas: 1
+  selector:
+    matchLabels:
+      service: nats
+      app: nats
+  template:
+    metadata:
+      labels:
+        app: nats
+        service: nats
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: nats
+          image: default-nats
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4222
+              name: nats
+            - containerPort: 8222
+              name: http
+            - containerPort: 8080
+              name: ws
+          resources:
+            requests:
+              cpu: 25m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - name: nats-pv
+              mountPath: /data/jetstream
+            - name: nats-config
+              mountPath: /etc/nats/
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+      volumes:
+        - name: nats-pv
+          persistentVolumeClaim:
+            claimName: nats-pvc
+        - name: nats-config
+          configMap:
+            name: configmap-nats
