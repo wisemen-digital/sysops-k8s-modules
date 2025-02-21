@@ -1,8 +1,8 @@
 ---
 resources:
+  - configmap.yaml
   - deployment.yaml
   - service.yaml
-  - configmap.yaml
 images:
   - name: default-pgbouncer
     newName: edoburu/pgbouncer
