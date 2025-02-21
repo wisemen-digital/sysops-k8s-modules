@@ -1,0 +1,10 @@
+---
+resources:
+  - configmap.yaml
+  - service.yaml
+  - statefulset.yaml
+  - volume.yaml
+images:
+  - name: default-nats
+    newName: nats
+    newTag: 2-alpine
