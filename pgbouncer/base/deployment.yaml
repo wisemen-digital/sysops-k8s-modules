@@ -29,10 +29,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-pgbouncer
-          volumeMounts:
-            - name: entrypoint-volume
-              mountPath: /entrypoint.sh
-              subPath: entrypoint.sh
           ports:
             - containerPort: 5432
               name: postgres
@@ -62,8 +58,3 @@ spec:
           readinessProbe:
             tcpSocket:
               port: postgres
-      volumes:
-        - name: entrypoint-volume
-          configMap:
-            name: configmap-entrypoint-pgbouncer
-            defaultMode: 0744
