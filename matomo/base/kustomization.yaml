@@ -2,6 +2,7 @@
 namespace: matomo
 resources:
   - ../../common/base/
+  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - volume.yaml
