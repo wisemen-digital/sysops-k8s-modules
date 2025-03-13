@@ -1,0 +1,16 @@
+---
+kind: StatefulSet
+metadata:
+  name: typesense
+spec:
+  template:
+    spec:
+      containers:
+        - name: typesense
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 500m
+            limits:
+              memory: 1536Mi
+              cpu: 2
