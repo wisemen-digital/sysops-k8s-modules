@@ -32,12 +32,12 @@ spec:
             - containerPort: 8108  # Must match configmap
               name: typesense
           resources:
-            requests:
-              memory: 256Mi
-              cpu: 50m
             limits:
-              memory: 1024Mi
-              cpu: 500m
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           volumeMounts:
             - name: typesense-pv
               mountPath: /usr/share/typesense/data  # Must match configmap
