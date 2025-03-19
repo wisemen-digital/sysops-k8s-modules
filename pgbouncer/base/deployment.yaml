@@ -29,12 +29,12 @@ spec:
             - containerPort: 5432
               name: postgres
           resources:
-            requests:
-              cpu: 25m
-              memory: 16Mi
             limits:
-              cpu: 100m
-              memory: 64M
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           lifecycle:
             preStop:
               exec:
