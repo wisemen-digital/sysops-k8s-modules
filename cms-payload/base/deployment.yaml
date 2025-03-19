@@ -31,12 +31,12 @@ spec:
             - containerPort: 3000
               name: http
           resources:
-            requests:
-              memory: 192Mi
-              cpu: 25m
             limits:
-              memory: 1024Mi
-              cpu: 600m
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           livenessProbe:
             httpGet:
               path: /health

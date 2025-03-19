@@ -1,0 +1,77 @@
+---
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.API_NODE_POD_LIMITS_CPU
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.limits.cpu
+    - select:
+        kind: CronJob
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.jobTemplate.spec.template.spec.containers.*.resources.limits.cpu
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.API_NODE_POD_LIMITS_MEM
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.limits.memory
+    - select:
+        kind: CronJob
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.jobTemplate.spec.template.spec.containers.*.resources.limits.memory
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.API_NODE_POD_REQUESTS_CPU
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.requests.cpu
+    - select:
+        kind: CronJob
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.jobTemplate.spec.template.spec.containers.*.resources.requests.cpu
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.API_NODE_POD_REQUESTS_MEM
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.requests.memory
+    - select:
+        kind: CronJob
+        labelSelector: app=api,stack=node
+      options:
+        create: true
+      fieldPaths:
+        - spec.jobTemplate.spec.template.spec.containers.*.resources.requests.memory
