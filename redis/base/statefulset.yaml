@@ -61,4 +61,4 @@ spec:
             claimName: redis-pvc
         - name: redis-config
           configMap:
-            name: configmap-redis
+            name: redis-config-file

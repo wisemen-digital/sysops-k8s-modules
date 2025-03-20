@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap-redis
+  name: redis-config-file
   labels:
     app: redis
     service: redis
