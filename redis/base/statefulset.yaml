@@ -5,20 +5,15 @@ metadata:
   name: redis
   labels:
     app: redis
-    service: redis
 spec:
   serviceName: redis
   podManagementPolicy: Parallel
   replicas: 1
   selector:
     matchLabels:
-      service: redis
       app: redis
+      service: redis
   template:
-    metadata:
-      labels:
-        app: redis
-        service: redis
     spec:
       terminationGracePeriodSeconds: 300
       containers:

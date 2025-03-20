@@ -5,6 +5,8 @@ metadata:
   name: api-websockets-service
   labels:
     app: api
+    stack: php
+    tier: backend
 spec:
   ports:
     - name: http

@@ -2,3 +2,9 @@
 resources:
   - deployment.yaml
   - service.yaml
+labels:
+  - pairs:
+      app: web
+      stack: nuxt
+      tier: frontend
+    includeTemplates: true

@@ -1,3 +1,9 @@
 ---
 resources:
   - deployment.yaml
+labels:
+  - pairs:
+      app: benthos
+      service: benthos
+      tier: service
+    includeTemplates: true

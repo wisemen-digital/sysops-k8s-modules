@@ -8,3 +8,9 @@ images:
   - name: default-typesense
     newName: typesense/typesense
     newTag: '26.0'
+labels:
+  - pairs:
+      app: typesense
+      service: typesense
+      tier: service
+    includeTemplates: true

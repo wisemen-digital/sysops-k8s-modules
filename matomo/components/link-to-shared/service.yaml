@@ -5,6 +5,8 @@ metadata:
   name: shared-matomo-service
   labels:
     app: matomo
+    service: matomo
+    tier: service
 spec:
   type: ExternalName
   externalName: shared-matomo-service.shared-matomo

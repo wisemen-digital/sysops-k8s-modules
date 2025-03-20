@@ -1,4 +1,5 @@
 ---
+namespace: matomo
 resources:
   - deployment.yaml
   - namespace.yaml
@@ -8,3 +9,9 @@ images:
   - name: default-matomo
     newName: ghcr.io/wisemen-digital/matomo
     newTag: latest
+labels:
+  - pairs:
+      app: matomo
+      service: matomo
+      tier: service
+    includeTemplates: true
