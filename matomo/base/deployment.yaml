@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: matomo
-  namespace: matomo
   labels:
     app: matomo
 spec:
@@ -17,9 +16,6 @@ spec:
       maxUnavailable: 50%
     type: RollingUpdate
   template:
-    metadata:
-      labels:
-        app: matomo
     spec:
       initContainers:
         - name: init

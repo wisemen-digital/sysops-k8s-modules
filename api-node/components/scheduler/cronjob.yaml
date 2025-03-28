@@ -5,6 +5,7 @@ metadata:
   name: api-scheduler
   labels:
     app: api
+    stack: node
     tier: backend
 spec:
   schedule: '*/30 * * * *'

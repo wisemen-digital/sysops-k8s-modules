@@ -2,3 +2,9 @@
 resources:
   - deployment.yaml
   - service.yaml
+labels:
+  - pairs:
+      app: cms
+      stack: payload
+      tier: backend
+    includeTemplates: true

@@ -7,3 +7,9 @@ images:
   - name: default-pgbouncer
     newName: edoburu/pgbouncer
     newTag: latest
+labels:
+  - pairs:
+      app: pgbouncer
+      service: pgbouncer
+      tier: service
+    includeTemplates: true

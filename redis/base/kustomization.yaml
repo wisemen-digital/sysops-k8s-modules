@@ -8,3 +8,9 @@ images:
   - name: default-redis
     newName: redis
     newTag: 7-alpine
+labels:
+  - pairs:
+      app: redis
+      service: redis
+      tier: service
+    includeTemplates: true

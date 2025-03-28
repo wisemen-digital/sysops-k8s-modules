@@ -5,6 +5,7 @@ metadata:
   name: api-queue
   labels:
     app: api
+    stack: php
     tier: backend
 spec:
   replicas: 1
@@ -20,6 +21,8 @@ spec:
     metadata:
       labels:
         app: api-queue
+        stack: php
+        tier: backend
     spec:
       imagePullSecrets:
         - name: docker-secret

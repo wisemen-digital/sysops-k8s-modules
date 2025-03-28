@@ -5,6 +5,7 @@ metadata:
   name: api-websockets
   labels:
     app: api
+    stack: node
     tier: backend
 spec:
   replicas: 1
@@ -20,6 +21,8 @@ spec:
     metadata:
       labels:
         app: api-websockets
+        stack: node
+        tier: backend
     spec:
       imagePullSecrets:
         - name: docker-secret

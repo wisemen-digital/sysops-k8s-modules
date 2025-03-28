@@ -2,3 +2,9 @@
 resources:
   - deployment.yaml
   - service.yaml
+labels:
+  - pairs:
+      app: api
+      stack: php
+      tier: backend
+    includeTemplates: true

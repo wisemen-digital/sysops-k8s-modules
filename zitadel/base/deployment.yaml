@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zitadel
-  namespace: zitadel
   labels:
     app: zitadel
 spec:
@@ -17,9 +16,6 @@ spec:
       maxUnavailable: 50%
     type: RollingUpdate
   template:
-    metadata:
-      labels:
-        app: zitadel
     spec:
       initContainers:
         - name: init
