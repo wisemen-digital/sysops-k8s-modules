@@ -15,3 +15,7 @@ labels:
       service: zitadel
       tier: service
     includeTemplates: true
+patches:
+  - path: ingress.yaml
+    target:
+      kind: Ingress
