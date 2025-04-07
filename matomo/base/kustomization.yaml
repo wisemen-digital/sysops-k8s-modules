@@ -1,8 +1,8 @@
 ---
 namespace: matomo
 resources:
+  - ../../common/base/
   - deployment.yaml
-  - namespace.yaml
   - service.yaml
   - volume.yaml
 images:
