@@ -1,0 +1,8 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: empty-ingress
+  annotations:
+    # Local configs aren't pushed by Kustomize
+    config.kubernetes.io/local-config: 'true'
