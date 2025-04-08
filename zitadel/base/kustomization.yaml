@@ -1,9 +1,9 @@
 ---
 namespace: zitadel
 resources:
+  - ../../common/base/
   - configmap.yaml
   - deployment.yaml
-  - namespace.yaml
   - service.yaml
 images:
   - name: default-zitadel
@@ -15,3 +15,7 @@ labels:
       service: zitadel
       tier: service
     includeTemplates: true
+patches:
+  - path: ingress.yaml
+    target:
+      kind: Ingress
