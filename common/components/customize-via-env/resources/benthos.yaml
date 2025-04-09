@@ -1,0 +1,49 @@
+---
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.BENTHOS_POD_LIMITS_CPU
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=benthos
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.limits.cpu
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.BENTHOS_POD_LIMITS_MEM
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=benthos
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.limits.memory
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.BENTHOS_POD_REQUESTS_CPU
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=benthos
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.requests.cpu
+- source:
+    kind: ConfigMap
+    name: configmap-common
+    fieldPath: data.BENTHOS_POD_REQUESTS_MEM
+  targets:
+    - select:
+        kind: Deployment
+        labelSelector: app=benthos
+      options:
+        create: true
+      fieldPaths:
+        - spec.template.spec.containers.*.resources.requests.memory

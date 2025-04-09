@@ -80,12 +80,12 @@ spec:
             - containerPort: 8080
               name: http
           resources:
-            requests:
-              cpu: 200m
-              memory: 256Mi
             limits:
-              cpu: 400m
-              memory: 512Mi
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           envFrom:
             - configMapRef:
                 name: configmap-zitadel
