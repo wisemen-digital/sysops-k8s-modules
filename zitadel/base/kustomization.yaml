@@ -5,6 +5,8 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - service.yaml
+components:
+  - ../../common/components/customize-via-env/
 images:
   - name: default-zitadel
     newName: ghcr.io/zitadel/zitadel
