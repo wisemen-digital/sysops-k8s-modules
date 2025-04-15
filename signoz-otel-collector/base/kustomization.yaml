@@ -1,11 +1,5 @@
 ---
 namespace: signoz-otel-collector
-labels:
-  - pairs:
-      app: signoz-otel-collector
-      service: signoz-otel-collector
-      tier: service
-    includeTemplates: true
 resources:
   - configmap.yaml
   - namespace.yaml
