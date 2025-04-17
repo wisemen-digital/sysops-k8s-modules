@@ -1,0 +1,9 @@
+---
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/scw-loadbalancer-proxy-protocol-v2: '443,80'
+    service.beta.kubernetes.io/scw-loadbalancer-use-hostname: 'true'
+  name: ingress-nginx-controller
+spec:
+  externalTrafficPolicy: Cluster

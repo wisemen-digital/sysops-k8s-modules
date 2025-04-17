@@ -1,0 +1,5 @@
+---
+resources:
+  - https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
+  - certs-issuer.yaml
+  - namespace.yaml
