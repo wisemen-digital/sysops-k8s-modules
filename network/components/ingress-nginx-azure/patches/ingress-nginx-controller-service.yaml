@@ -1,0 +1,6 @@
+---
+kind: Service
+metadata:
+  name: ingress-nginx-controller
+spec:
+  externalTrafficPolicy: Local

@@ -1,0 +1,5 @@
+---
+# Clean up jobs so upgrades don't fail
+- op: add
+  path: /spec/ttlSecondsAfterFinished
+  value: 0
