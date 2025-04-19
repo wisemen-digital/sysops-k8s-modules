@@ -1,0 +1,8 @@
+---
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+data:
+  # Allow annotations such as `configuration-snippet` & `server-snippet`
+  allow-snippet-annotations: 'true'
+  annotations-risk-level: 'Critical'

@@ -1,0 +1,16 @@
+---
+kind: Service
+metadata:
+  annotations:
+    # Name for DO UI
+    service.beta.kubernetes.io/do-loadbalancer-name: 'k8s-loadbalancer'
+    # Based on https://github.com/digitalocean/digitalocean-cloud-controller-manager/blob/master/docs/controllers/services/examples/https-with-pass-through-nginx.yml
+    service.beta.kubernetes.io/do-loadbalancer-protocol: 'http'
+    service.beta.kubernetes.io/do-loadbalancer-tls-ports: '443'
+    service.beta.kubernetes.io/do-loadbalancer-tls-passthrough: 'true'
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
+    # Per https://github.com/digitalocean/digitalocean-cloud-controller-manager/blob/master/docs/controllers/services/annotations.md#servicebetakubernetesiodo-loadbalancer-http-ports
+    service.beta.kubernetes.io/do-loadbalancer-http-ports: '80'
+  name: ingress-nginx-controller
+spec:
+  externalTrafficPolicy: Cluster
