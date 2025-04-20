@@ -1,8 +1,14 @@
 ---
 namespace: zitadel
+configMapGenerator:
+  - name: configmap-zitadel
+    envs:
+      - config/env.properties
+  - name: zitadel-config-file
+    files:
+      - config/zitadel-config.yaml
 resources:
   - ../../common/base/
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
 images:

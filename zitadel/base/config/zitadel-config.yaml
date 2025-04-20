@@ -1,0 +1,29 @@
+---
+# All possible options and their defaults:
+# https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+Log:
+  Level: info
+LogStore:
+  Access:
+    Stdout:
+      Enabled: false
+ExternalPort: 443
+ExternalSecure: true
+Database:
+  postgres:
+    User:
+      SSL:
+        Mode: 'disable'
+    Admin:
+      SSL:
+        Mode: 'disable'
+Machine:
+  Identification:
+    Hostname:
+      Enabled: true  # Needed otherwise setup gets stuck during migrations
+DefaultInstance:
+  OIDCSettings:
+    AccessTokenLifetime: 12h
+    IdTokenLifetime: 12h
+    RefreshTokenIdleExpiration: 720h  # 30 days
+    RefreshTokenExpiration: 8640h  # 360 days

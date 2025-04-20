@@ -1,8 +1,11 @@
 ---
 namespace: matomo
+configMapGenerator:
+  - name: configmap-matomo
+    envs:
+      - config/env.properties
 resources:
   - ../../common/base/
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - volume.yaml

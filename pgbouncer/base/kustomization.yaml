@@ -1,6 +1,9 @@
 ---
+configMapGenerator:
+  - name: configmap-pgbouncer
+    envs:
+      - config/env.properties
 resources:
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
 images:

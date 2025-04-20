@@ -1,6 +1,13 @@
 ---
+configMapGenerator:
+  - name: configmap-redis
+    envs:
+      - config/env.properties
+  - name: redis-config-file
+    files:
+      - config/redis.conf
+      - config/users.acl
 resources:
-  - configmap.yaml
   - service.yaml
   - statefulset.yaml
   - volume.yaml

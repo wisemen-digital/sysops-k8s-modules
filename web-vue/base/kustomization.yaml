@@ -1,6 +1,9 @@
 ---
+configMapGenerator:
+  - name: configmap-web
+    envs:
+      - config/env.properties
 resources:
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
 labels:

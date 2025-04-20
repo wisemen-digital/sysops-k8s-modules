@@ -1,7 +1,10 @@
 ---
 namespace: signoz-otel-collector
+configMapGenerator:
+  - name: configmap-otel
+    envs:
+      - config/env.properties
 resources:
-  - configmap.yaml
   - namespace.yaml
   - otel-agent/
   - otel-deployment/

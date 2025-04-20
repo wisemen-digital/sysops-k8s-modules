@@ -1,6 +1,9 @@
 ---
+configMapGenerator:
+  - name: configmap-benthos
+    envs:
+      - config/env.properties
 resources:
-  - configmap.yaml
   - deployment.yaml
 labels:
   - pairs:
