@@ -4,7 +4,6 @@ configMapGenerator:
     envs:
       - config/env.properties
 resources:
-  - configmap.yaml
   - service.yaml
   - statefulset.yaml
   - volume.yaml
