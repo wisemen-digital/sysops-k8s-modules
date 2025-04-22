@@ -1,1 +1,1 @@
-ser default on nopass sanitize-payload ~* &* +@all
+user default on nopass sanitize-payload ~* &* +@all
