@@ -39,6 +39,9 @@ spec:
             limits:
               cpu: 200m
               memory: 256Mi
+          envFrom:
+            - configMapRef:
+                name: configmap-nats
           volumeMounts:
             - name: nats-pv
               mountPath: /data/jetstream
@@ -65,4 +68,4 @@ spec:
             claimName: nats-pvc
         - name: nats-config
           configMap:
-            name: configmap-nats
+            name: nats-config-file

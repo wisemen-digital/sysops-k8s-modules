@@ -1,4 +1,11 @@
 ---
+configMapGenerator:
+  - name: configmap-nats
+    envs:
+      - config/env.properties
+  - name: nats-config-file
+    files:
+      - config/nats.conf
 resources:
   - configmap.yaml
   - service.yaml
