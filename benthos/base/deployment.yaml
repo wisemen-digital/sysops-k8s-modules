@@ -24,6 +24,9 @@ spec:
           image: docker.redpanda.com/redpandadata/redpanda
           imagePullPolicy: Always
           args: ['connect', 'run']
+          envFrom:
+            - configMapRef:
+                name: configmap-benthos
           volumeMounts:
             - name: config-volume
               mountPath: /connect.yaml
