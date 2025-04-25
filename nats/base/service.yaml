@@ -12,5 +12,9 @@ spec:
       port: 4222
       targetPort: nats
       protocol: TCP
+    - name: ws
+      port: 8080
+      targetPort: ws
+      protocol: TCP
   selector:
     app: nats
