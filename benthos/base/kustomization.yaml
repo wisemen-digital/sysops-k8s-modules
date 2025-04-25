@@ -5,6 +5,10 @@ configMapGenerator:
       - config/env.properties
 resources:
   - deployment.yaml
+images:
+  - name: default-benthos
+    newName: docker.redpanda.com/redpandadata/connect
+    newTag: latest
 labels:
   - pairs:
       app: benthos

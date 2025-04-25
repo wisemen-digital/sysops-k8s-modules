@@ -21,9 +21,9 @@ spec:
         - name: docker-secret
       containers:
         - name: benthos
-          image: docker.redpanda.com/redpandadata/redpanda
+          image: default-benthos
           imagePullPolicy: Always
-          args: ['connect', 'run']
+          args: ['run']
           envFrom:
             - configMapRef:
                 name: configmap-benthos
