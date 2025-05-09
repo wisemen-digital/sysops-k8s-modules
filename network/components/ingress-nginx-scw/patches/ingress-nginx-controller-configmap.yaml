@@ -11,3 +11,9 @@ data:
   compute-full-forwarded-for: 'true'
   use-forwarded-headers: 'true'
   use-proxy-protocol: 'true'
+  # Enable ModSecurity and OWASP Core Rule Set
+  enable-modsecurity: "true"
+  enable-owasp-modsecurity-crs: "true"
+  modsecurity-snippet: |-
+      SecRuleEngine On
+      SecAuditLog /dev/stdout
