@@ -26,9 +26,9 @@ spec:
                     name: configmap-api
               resources:
                 requests:
-                  memory: 128Mi
-                  cpu: 50m
+                  cpu: to-be-replaced
+                  memory: to-be-replaced
                 limits:
-                  memory: 512Mi
-                  cpu: 400m
+                  cpu: to-be-replaced
+                  memory: to-be-replaced
           restartPolicy: OnFailure

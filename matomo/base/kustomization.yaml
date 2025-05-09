@@ -9,6 +9,8 @@ resources:
   - deployment.yaml
   - service.yaml
   - volume.yaml
+components:
+  - ../../common/components/customize-via-env/
 images:
   - name: default-matomo
     newName: ghcr.io/wisemen-digital/matomo

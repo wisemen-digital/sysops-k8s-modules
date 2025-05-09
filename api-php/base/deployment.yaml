@@ -39,12 +39,12 @@ spec:
             - containerPort: 8080
               name: http
           resources:
-            requests:
-              memory: 320Mi
-              cpu: 50m
             limits:
-              memory: 1Gi
-              cpu: 400m
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           startupProbe:
             httpGet:
               path: /api
