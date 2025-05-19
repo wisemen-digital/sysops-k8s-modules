@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-deployment
+  labels:
+    app: otel-deployment
+spec:
+  selector:
+    matchLabels:
+      app: otel-deployment
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+  template:
+    metadata:
+      labels:
+        app: otel-deployment
+    spec:
+      containers:
+        - name: otel-deployment
+          image: default-otel-collector
+          imagePullPolicy: IfNotPresent
+          command:
+            - '/otelcol-contrib'
+          args:
+            - '--config=/conf/otel-deployment-config.yaml'
+          ports:
+            - name: health-check
+              containerPort: 13133
+          volumeMounts:
+            - name: otel-deployment-config-vol
+              mountPath: /conf
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          livenessProbe:
+            httpGet:
+              port: health-check
+              path: /
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              port: health-check
+              path: /
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+      volumes:
+        - name: otel-deployment-config-vol
+          configMap:
+            name: otel-deployment-config-file

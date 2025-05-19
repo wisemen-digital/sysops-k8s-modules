@@ -1,0 +1,13 @@
+---
+namespace: monitoring
+resources:
+  - namespace.yaml
+  - blackbox/
+  - otel/
+images:
+  - name: default-blackbox
+    newName: prom/blackbox-exporter
+    newTag: latest
+  - name: default-otel-collector
+    newName: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
+    newTag: latest
