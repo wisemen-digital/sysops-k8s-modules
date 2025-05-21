@@ -20,3 +20,7 @@ data:
   compute-full-forwarded-for: 'true'
   use-forwarded-headers: 'true'
   use-proxy-protocol: 'true'
+  # Enable OpenTelemetry
+  enable-opentelemetry: 'true'
+  otlp-collector-host: 'shared-otel-agent-service.shared-otel-collector.svc.cluster.local'
+  opentelemetry-operation-name: 'HTTP $request_method $service_name $uri'
