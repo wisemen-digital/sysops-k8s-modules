@@ -1,0 +1,7 @@
+---
+resources:
+  - deployment.yaml
+configmapgenerator:
+  - name: blackbox-config
+    files:
+      - config/blackbox.conf
