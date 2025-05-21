@@ -6,3 +6,12 @@ data:
   # Allow annotations such as `configuration-snippet` & `server-snippet`
   allow-snippet-annotations: 'true'
   annotations-risk-level: 'Critical'
+  # Session resumption (faster connections)
+  ssl-session-cache: 'true'
+  ssl_session_cache_size: 'shared:SSL:10m'
+  ssl-session-timeout: '10m'
+  # HSTS Preloading (faster connections)
+  hsts: 'true'
+  hsts-include-subdomains: 'true'
+  hsts-max-age: '63072000'
+  hsts-preload: 'true'
