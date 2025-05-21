@@ -26,6 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-matomo
+            - secretRef:
+                name: secrets-matomo
           volumeMounts:
             - mountPath: /var/www/html
               name: html-files

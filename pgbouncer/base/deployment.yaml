@@ -25,6 +25,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-pgbouncer
+            - secretRef:
+                name: secrets-pgbouncer
           ports:
             - containerPort: 5432
               name: postgres

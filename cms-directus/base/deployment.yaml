@@ -26,6 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-cms
+            - secretRef:
+                name: secrets-cms
           ports:
             - containerPort: 3000
               name: http

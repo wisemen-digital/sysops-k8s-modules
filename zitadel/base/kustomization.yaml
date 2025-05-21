@@ -7,6 +7,10 @@ configMapGenerator:
   - name: zitadel-config-file
     files:
       - config/zitadel-config.yaml
+secretGenerator:
+  - name: secrets-zitadel
+    envs:
+      - config/secrets.properties
 resources:
   - ../../common/base/
   - deployment.yaml

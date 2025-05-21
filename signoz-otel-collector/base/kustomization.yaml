@@ -4,6 +4,10 @@ configMapGenerator:
   - name: configmap-otel
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-otel
+    envs:
+      - config/secrets.properties
 resources:
   - namespace.yaml
   - otel-agent/

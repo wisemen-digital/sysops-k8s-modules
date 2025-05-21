@@ -36,6 +36,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-redis
+            - secretRef:
+                name: secrets-redis
           volumeMounts:
             - name: redis-pv
               mountPath: /data  # Must match configmap

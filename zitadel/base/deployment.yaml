@@ -28,6 +28,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-zitadel
+            - secretRef:
+                name: secrets-zitadel
           volumeMounts:
             - mountPath: /zitadel-config.yaml
               name: config-file
@@ -43,6 +45,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-zitadel
+            - secretRef:
+                name: secrets-zitadel
           volumeMounts:
             - mountPath: /zitadel-config.yaml
               name: config-file
@@ -61,6 +65,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-zitadel
+            - secretRef:
+                name: secrets-zitadel
           volumeMounts:
             - mountPath: /zitadel-config.yaml
               name: config-file
@@ -89,6 +95,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-zitadel
+            - secretRef:
+                name: secrets-zitadel
           volumeMounts:
             - mountPath: /zitadel-config.yaml
               name: config-file

@@ -3,6 +3,10 @@ configMapGenerator:
   - name: configmap-web
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-web
+    envs:
+      - config/secrets.properties
 resources:
   - deployment.yaml
   - service.yaml

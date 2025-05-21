@@ -28,6 +28,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-typesense
+            - secretRef:
+                name: secrets-typsense
           ports:
             - containerPort: 8108  # Must match configmap
               name: typesense

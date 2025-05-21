@@ -4,6 +4,10 @@ configMapGenerator:
   - name: configmap-matomo
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-matomo
+    envs:
+      - config/secrets.properties
 resources:
   - ../../common/base/
   - deployment.yaml
