@@ -3,6 +3,10 @@ configMapGenerator:
   - name: configmap-pgbouncer
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-pgbouncer
+    envs:
+      - config/secrets.properties
 resources:
   - deployment.yaml
   - service.yaml

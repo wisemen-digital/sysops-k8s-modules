@@ -3,6 +3,10 @@ configMapGenerator:
   - name: configmap-benthos
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-benthos
+    envs:
+      - config/secrets.properties
 resources:
   - deployment.yaml
 images:

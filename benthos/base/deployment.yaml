@@ -27,6 +27,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-benthos
+            - secretRef:
+                name: secrets-benthos
           volumeMounts:
             - name: config-volume
               mountPath: /connect.yaml

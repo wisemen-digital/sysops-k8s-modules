@@ -3,6 +3,10 @@ configMapGenerator:
   - name: configmap-typesense
     envs:
       - config/env.properties
+secretGenerator:
+  - name: secrets-typesense
+    envs:
+      - config/secrets.properties
 resources:
   - service.yaml
   - statefulset.yaml

@@ -35,6 +35,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-api
+            - secretRef:
+                name: secrets-api
       containers:
         - name: api-scheduler
           image: default-api
@@ -44,6 +46,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-api
+            - secretRef:
+                name: secrets-api
           resources:
             requests:
               memory: 256Mi

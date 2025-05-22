@@ -27,6 +27,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-api
+            - secretRef:
+                name: secrets-api
           ports:
             - containerPort: 3000
               name: http

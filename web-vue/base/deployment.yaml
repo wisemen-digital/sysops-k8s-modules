@@ -26,6 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-web
+            - secretRef:
+                name: secrets-web
           ports:
             - containerPort: 80
               name: http

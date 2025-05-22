@@ -27,6 +27,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-otel
+            - secretRef:
+                name: secrets-otel
           env:
             - name: K8S_NODE_NAME
               valueFrom:

@@ -7,6 +7,10 @@ configMapGenerator:
     files:
       - config/redis.conf
       - config/users.acl
+secretGenerator:
+  - name: secrets-redis
+    envs:
+      - config/secrets.properties
 resources:
   - service.yaml
   - statefulset.yaml

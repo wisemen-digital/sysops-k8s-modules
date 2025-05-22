@@ -28,6 +28,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-api
+            - secretRef:
+                name: secrets-api
       containers:
         - name: api
           image: default-api
@@ -35,6 +37,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-api
+            - secretRef:
+                name: secrets-api
           ports:
             - containerPort: 8080
               name: http
