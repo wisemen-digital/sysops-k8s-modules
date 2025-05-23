@@ -4,4 +4,16 @@ resources:
   - namespace.yaml
 configMapGenerator:
   - name: configmap-common
-    envs: []
+    envs:
+      - env/api-node.properties
+      - env/api-php.properties
+      - env/benthos.properties
+      - env/cms-directus.properties
+      - env/cms-payload.properties
+      - env/matomo.properties
+      - env/pgbouncer.properties
+      - env/redis.properties
+      - env/typesense.properties
+      - env/web-nuxt.properties
+      - env/web-vue.properties
+      - env/zitadel.properties

@@ -37,12 +37,12 @@ spec:
             - containerPort: 8080
               name: http
           resources:
-            requests:
-              cpu: 1000m
-              memory: 512Mi
             limits:
-              cpu: 2000m
-              memory: 1Gi
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           volumeMounts:
             - mountPath: /var/www/html
               name: html-files

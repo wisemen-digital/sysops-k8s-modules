@@ -23,19 +23,19 @@ spec:
           command:
             - redis-server
             - /usr/local/etc/redis/redis.conf
+          envFrom:
+            - configMapRef:
+                name: configmap-redis
           ports:
             - containerPort: 6379
               name: redis
           resources:
-            requests:
-              cpu: 25m
-              memory: 16Mi
             limits:
-              cpu: 200m
-              memory: 256Mi
-          envFrom:
-            - configMapRef:
-                name: configmap-redis
+              cpu: to-be-replaced
+              memory: to-be-replaced
+            requests:
+              cpu: to-be-replaced
+              memory: to-be-replaced
           volumeMounts:
             - name: redis-pv
               mountPath: /data  # Must match configmap
